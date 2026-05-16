@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maestros de la Luz | Top 5 Fotógrafos del Mundo</title>
+    <!-- Google Fonts & FontAwesome para Iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --accent: #e50914;
+            --border: #262626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            border-bottom: 1px solid var(--border);
+            background: linear-gradient(180deg, #000 0%, var(--bg-color) 100%);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Perfil de Fotógrafo */
+        .photographer-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .photographer-header {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 35px;
+        }
+
+        @media (min-width: 768px) {
+            .photographer-header {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .info-main h2 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .tag-type {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .bio-section h3, .gallery-section h4 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .bio-section p {
+            color: #d1d1d1;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Redes Sociales */
+        .social-box {
+            background-color: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .social-box h4 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-main);
+            background-color: var(--border);
+            width: 45px;
+            height: 45px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #fff;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        /* Galería de Obras Emblemáticas */
+        .gallery-section {
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 3/2;
+            background-color: #222;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-cover: cover;
+            filter: grayscale(20%);
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .photo-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            padding: 15px 10px 8px 10px;
+            font-size: 0.8rem;
+            color: #fff;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .photo-title {
+            opacity: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Maestros de la Luz</h1>
+        <p>Un recorrido visual por los 5 fotógrafos más influyentes del mundo, sus estilos y sus obras de arte más emblemáticas.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- FOTÓGRAFO 1: Ansel Adams -->
+        <article class="photographer-card">
+            <div class="photographer-header">
+                <div class="info-main">
+                    <span class="tag-type">Fotografía de Paisaje / Zona System</span>
+                    <h2>Ansel Adams</h2>
+                    <div class="bio-section">
+                        <h3>Biografía e Impacto</h3>
+                        <p>Ansel Adams (1902–1984) fue un fotógrafo estadounidense célebre por capturar la majestuosidad del oeste de EE.UU. en un espectacular blanco y negro. Co-creador del legendario "Sistema de Zonas", revolucionó el control técnico de la exposición y el revelado.</p>
+                        <p>Su trabajo no solo transformó la fotografía de paisajes en bellas artes, sino que sus icónicas imágenes en parques nacionales fueron cruciales para el desarrollo del sistema de conservación del medio ambiente en Norteamérica.</p>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h4>Legado y Enlaces</h4>
+                    <div class="social-links">
+                        <a href="https://www.anseladams.com" target="_blank" title="Sitio Web Oficial"><i class="fa-solid fa-globe"></i></a>
+                        <a href="https://www.instagram.com/anseladams" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://en.wikipedia.org/wiki/Ansel_Adams" target="_blank" title="Wikipedia"><i class="fa-brands fa-wikipedia-w"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-section">
+                <h4>5 Fotos Emblemáticas</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=500&auto=format&fit=crop" alt="Monolith, The Face of Half Dome">
+                        <div class="photo-title">Monolith, The Face of Half Dome (1927)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=500&auto=format&fit=crop" alt="The Tetons and the Snake River">
+                        <div class="photo-title">The Tetons and the Snake River (1942)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=500&auto=format&fit=crop" alt="Moonrise, Hernandez, New Mexico">
+                        <div class="photo-title">Moonrise, Hernandez (1941)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&auto=format&fit=crop" alt="Clearing Winter Storm, Yosemite">
+                        <div class="photo-title">Clearing Winter Storm (1944)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=500&auto=format&fit=crop" alt="Oak Tree, Snow Storm">
+                        <div class="photo-title">Oak Tree, Snow Storm (1948)</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- FOTÓGRAFO 2: Henri Cartier-Bresson -->
+        <article class="photographer-card">
+            <div class="photographer-header">
+                <div class="info-main">
+                    <span class="tag-type">Fotoperiodismo / Calle</span>
+                    <h2>Henri Cartier-Bresson</h2>
+                    <div class="bio-section">
+                        <h3>Biografía e Impacto</h3>
+                        <p>Considerado el padre del fotoperiodismo moderno, Cartier-Bresson (1908–2004) dominó el arte de la fotografía callejera espontánea. Fue la mente brillante detrás del concepto del "Instante Decisivo": ese milisegundo exacto donde los elementos visuales se alinean perfectamente para contar una historia.</p>
+                        <p>Cofundador de la mítica Agencia Magnum, documentó eventos históricos globales manteniendo siempre una perspectiva artística y humanista insuperable utilizando su inseparable Leica de 35mm.</p>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h4>Legado y Enlaces</h4>
+                    <div class="social-links">
+                        <a href="https://www.henricartierbresson.org" target="_blank" title="Fundación HCB"><i class="fa-solid fa-building-columns"></i></a>
+                        <a href="https://www.magnumphotos.com" target="_blank" title="Magnum Photos"><i class="fa-solid fa-camera-retro"></i></a>
+                        <a href="https://en.wikipedia.org/wiki/Henri_Cartier-Bresson" target="_blank" title="Wikipedia"><i class="fa-brands fa-wikipedia-w"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-section">
+                <h4>5 Fotos Emblemáticas</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&auto=format&fit=crop" alt="Detrás de la estación Saint-Lazare">
+                        <div class="photo-title">Behind the Gare Saint-Lazare (1932)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1481026469463-66327c86e544?w=500&auto=format&fit=crop" alt="Sifnos, Grecia">
+                        <div class="photo-title">Sifnos, Greece (1961)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1527269537047-44f17ddc824c?w=500&auto=format&fit=crop" alt="Hyères, Francia">
+                        <div class="photo-title">Hyères, France (Bicycle) (1932)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1543807535-eceef0bc6599?w=500&auto=format&fit=crop" alt="Alberto Giacometti">
+                        <div class="photo-title">Alberto Giacometti (1961)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=500&auto=format&fit=crop" alt="Rue Mouffetard">
+                        <div class="photo-title">Rue Mouffetard, Paris (1954)</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- FOTÓGRAFO 3: Annie Leibovitz -->
+        <article class="photographer-card">
+            <div class="photographer-header">
+                <div class="info-main">
+                    <span class="tag-type">Retrato / Moda / Editorial</span>
+                    <h2>Annie Leibovitz</h2>
+                    <div class="bio-section">
+                        <h3>Biografía e Impacto</h3>
+                        <p>Annie Leibovitz (1949) es posiblemente la retratista más influyente de la cultura pop contemporánea. Su carrera despegó en la revista *Rolling Stone* y se consolidó en *Vanity Fair* y *Vogue*. Su estilo se define por composiciones teatrales dramáticas, iluminación pictórica de estudio muy cuidada y un manejo exquisito del color.</p>
+                        <p>Ha inmortalizado a las figuras más grandes de la música, el cine y la política, convirtiendo cada encargo comercial en una obra maestra visual con un valor narrativo único.</p>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h4>Redes y Enlaces</h4>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/annieleibovitz" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/annieleibovitz" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://en.wikipedia.org/wiki/Annie_Leibovitz" target="_blank" title="Wikipedia"><i class="fa-brands fa-wikipedia-w"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-section">
+                <h4>5 Fotos Emblemáticas</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop" alt="John Lennon & Yoko Ono">
+                        <div class="photo-title">John Lennon & Yoko Ono (1980)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop" alt="Demi Moore Embarazada">
+                        <div class="photo-title">Demi Moore (Vanity Fair Cover) (1991)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop" alt="Whoopi Goldberg en tina de leche">
+                        <div class="photo-title">Whoopi Goldberg (Milk Bath) (1984)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop" alt="Reina Isabel II">
+                        <div class="photo-title">Queen Elizabeth II (Buckingham) (2007)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500&auto=format&fit=crop" alt="Mikhail Gorbachev">
+                        <div class="photo-title">Mikhail Gorbachev (Louis Vuitton) (2007)</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- FOTÓGRAFO 4: Steve McCurry -->
+        <article class="photographer-card">
+            <div class="photographer-header">
+                <div class="info-main">
+                    <span class="tag-type">Documental / Retrato Antropológico</span>
+                    <h2>Steve McCurry</h2>
+                    <div class="bio-section">
+                        <h3>Biografía e Impacto</h3>
+                        <p>Steve McCurry (1950) es un pilar fundamental del fotoperiodismo internacional. Con más de cuatro décadas de trayectoria, destaca por capturar la condición humana en situaciones de conflicto y culturas en peligro de desaparición a través de un color asombroso y contrastado.</p>
+                        <p>Su enfoque trasciende el reportaje bélico clásico, concentrándose en las historias individuales reflejadas en los ojos de las personas, logrando composiciones que se quedan grabadas en la memoria colectiva del mundo.</p>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h4>Redes y Enlaces</h4>
+                    <div class="social-links">
+                        <a href="https://www.stevemccurry.com" target="_blank" title="Sitio Web"><i class="fa-solid fa-user"></i></a>
+                        <a href="https://www.instagram.com/stevemccurryofficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://twitter.com/stevemccurry" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-section">
+                <h4>5 Fotos Emblemáticas</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop" alt="La Niña Afgana">
+                        <div class="photo-title">The Afghan Girl (Sharbat Gula) (1984)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=500&auto=format&fit=crop" alt="Sastrería en los Monzones">
+                        <div class="photo-title">Tailor in Monsoon, India (1983)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&auto=format&fit=crop" alt="Monje en el templo Shaolin">
+                        <div class="photo-title">Shaolin Monks Training, China (2004)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1504257404764-5221a95f3ef1?w=500&auto=format&fit=crop" alt="Pescadores en Zancos">
+                        <div class="photo-title">Stilt Fishermen, Sri Lanka (1995)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1489980508314-941910ded1f4?w=500&auto=format&fit=crop" alt="Niño de azul, Jodhpur">
+                        <div class="photo-title">Boy in Mid-Flight, Jodhpur (1996)</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- FOTÓGRAFO 5: Sebastiao Salgado -->
+        <article class="photographer-card">
+            <div class="photographer-header">
+                <div class="info-main">
+                    <span class="tag-type">Socio-Documental / Ecología</span>
+                    <h2>Sebastião Salgado</h2>
+                    <div class="bio-section">
+                        <h3>Biografía e Impacto</h3>
+                        <p>Sebastião Salgado (1944) es un fotógrafo sociodocumental y economista brasileño, mundialmente reconocido por sus épicos proyectos a largo plazo que exploran la desigualdad social, la migración humana y la belleza intacta del planeta Tierra.</p>
+                        <p>Utilizando un blanco y negro texturizado y un manejo magistral del claroscuro y la luz natural, Salgado otorga una dignidad monumental a las comunidades vulnerables y paisajes remotos, convirtiendo la fotografía en un llamado urgente a la conciencia global.</p>
+                    </div>
+                </div>
+                <div class="social-box">
+                    <h4>Legado y Enlaces</h4>
+                    <div class="social-links">
+                        <a href="https://www.institutoterra.org" target="_blank" title="Instituto Terra"><i class="fa-solid fa-leaf"></i></a>
+                        <a href="https://www.amazon.com/Sebasti%C3%A3o-Salgado/e/B001H6O5I6" target="_blank" title="Libros Antológicos"><i class="fa-solid fa-book"></i></a>
+                        <a href="https://en.wikipedia.org/wiki/Sebasti%C3%A3o_Salgado" target="_blank" title="Wikipedia"><i class="fa-brands fa-wikipedia-w"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery-section">
+                <h4>5 Fotos Emblemáticas</h4>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=500&auto=format&fit=crop" alt="Mina de oro Serra Pelada">
+                        <div class="photo-title">Gold Mine, Serra Pelada, Brazil (1986)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=500&auto=format&fit=crop" alt="Génesis - Paisaje Salvaje">
+                        <div class="photo-title">Genesis Project (Antarctica) (2005)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1433832597046-4f10e10ac764?w=500&auto=format&fit=crop" alt="Migraciones">
+                        <div class="photo-title">Exodus / Migrations (2000)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=500&auto=format&fit=crop" alt="Amazonia">
+                        <div class="photo-title">Amazônia Project (2019)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=500&auto=format&fit=crop" alt="The Dinka People">
+                        <div class="photo-title">The Dinka People, Sudan (1993)</div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Maestros de la Luz. Diseñado bajo estándares web modernos.</p>
+    </footer>
+
+</body>
+</html>
